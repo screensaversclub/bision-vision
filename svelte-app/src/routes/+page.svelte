@@ -30,7 +30,7 @@
 			<p class="time">
 				{dp.formattedTime.toLocaleString()}
 			</p>
-			<p>
+			<p class="score">
 				{dp.score}
 			</p>
 			<img
@@ -44,8 +44,10 @@
 <style>
 	h1 {
 		text-align: center;
+		font-family: monospace;
 	}
 	div.row {
+		font-family: monospace;
 		display: flex;
 		align-items: flex-start;
 		width: 100%;
@@ -57,6 +59,12 @@
 
 	div.row p {
 		margin: 0;
+	}
+
+	div.row p.score {
+		background: #000;
+		padding: 2px;
+		color: #fff;
 	}
 
 	div.row img {

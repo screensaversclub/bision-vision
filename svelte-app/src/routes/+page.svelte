@@ -1,11 +1,24 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { toZonedTime } from 'date-fns-tz';
 	export let data: PageData;
 
 	const dataPoints = data.data
 		.map((d) => ({
 			...d,
-			timestamp: new Date(d.timestamp)
+			timestamp: new Date(d.timestamp),
+			formattedTime: toZonedTime(
+				d.timestamp.split(' ').reduce((p: string, c, i) => {
+					if (i === 0) {
+						return `${c}T`;
+					} else if (i === 1) {
+						return `${p}${c}Z`;
+					} else {
+						return p;
+					}
+				}, ''),
+				'Asia/Singapore'
+			)
 		}))
 		.sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1));
 </script>
@@ -15,7 +28,7 @@
 	{#each dataPoints as dp}
 		<div class="row">
 			<p class="time">
-				{dp.timestamp.toLocaleString()}
+				{dp.formattedTime.toLocaleString()}
 			</p>
 			<p>
 				{dp.score}

@@ -36,6 +36,7 @@
 			<img
 				src={`https://bision-vision.i-424.workers.dev/?mode=img&imgKey=${dp.img_url.replace('.jpg', '')}`}
 				alt="img"
+loading="lazy"
 			/>
 		</div>
 	{/each}

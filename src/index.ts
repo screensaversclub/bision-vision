@@ -19,6 +19,12 @@ function base64Decode(string: string) {
 	return buf;
 }
 
+const corsHeaders = {
+	'Access-Control-Allow-Origin': '*',
+	'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+	'Access-Control-Max-Age': '86400',
+};
+
 export default {
 	async fetch(req: Request, env: Env) {
 		const params = new URL(req.url).searchParams;
@@ -34,13 +40,17 @@ export default {
 				return new Response('Object Not Found', { status: 404 });
 			}
 
-			const headers = new Headers();
+			const headers = new Headers(corsHeaders);
+
 			object.writeHttpMetadata(headers);
 
 			return new Response(object.body);
 		} else if (cam !== null) {
 			const { results } = await env.DB.prepare('SELECT * FROM Results WHERE camera = ?').bind(cam).all();
-			return Response.json(results);
+
+			return Response.json(results, {
+				headers: { ...corsHeaders },
+			});
 		} else {
 			return new Response('Object Not Found', { status: 404 });
 		}

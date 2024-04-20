@@ -56,7 +56,7 @@ export default {
 		}
 	},
 
-	async scheduled(event: ScheduledEvent, env: Env) {
+	async scheduled(_event: ScheduledEvent, env: Env) {
 		const anthropic = new Anthropic({
 			apiKey: env.ANTHROPIC_API_KEY,
 			baseURL: 'https://gateway.ai.cloudflare.com/v1/424353e86dca02b3e534d0db7eebb15d/bision-vision/anthropic',
@@ -76,10 +76,11 @@ export default {
 		const text = base64Encode(await upstreamResponse.arrayBuffer());
 		const binary = base64Decode(text);
 
-		const put = await env.R2.put(key, binary);
+		await env.R2.put(key, binary);
 
 		const msg = await anthropic.messages.create({
-			model: 'claude-3-opus-20240229',
+			//model: 'claude-3-opus-20240229',
+			model: 'claude-3-haiku-20240307',
 			max_tokens: 1000,
 			temperature: 0,
 			messages: [

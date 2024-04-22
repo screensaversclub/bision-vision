@@ -24,7 +24,7 @@
 </script>
 
 <div>
-	<h1>KL Putrajaya near salak selatan</h1>
+	<h1>PLUS-Selatan SUNGAI BESI TOLL KM310.1 NB</h1>
 	{#each dataPoints as dp}
 		<div class="row">
 			<p class="time">
@@ -36,7 +36,7 @@
 			<img
 				src={`https://bision-vision.i-424.workers.dev/?mode=img&imgKey=${dp.img_url.replace('.jpg', '')}`}
 				alt="img"
-loading="lazy"
+				loading="lazy"
 			/>
 		</div>
 	{/each}

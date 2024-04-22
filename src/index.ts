@@ -65,7 +65,8 @@ export default {
 		const rand = Math.floor(Math.random() * 10000);
 		const key = new Date().toISOString();
 		//const url = 'https://datamall.lta.gov.sg/trafficsmart/images/4703_0553_20240420055407_4ff1d0.jpg';
-		const url = 'https://p5.fgies.com/bucket-klp/KLP-03.jpg';
+		// const url = 'https://p5.fgies.com/bucket-klp/KLP-03.jpg';
+		const url = 'https://p4.fgies.com/bucket-e2/E2-01.jpg';
 		//const url = 'https://qs.fgies.com/bucket-elite/ELITE-01.jpg';
 		let upstreamResponse = await fetch(`${url}?${rand}`, {
 			headers: {
@@ -104,7 +105,7 @@ export default {
 			],
 		});
 
-		const cam = 'KL-PUTRAJAYA NEAR SALAK SELATAN';
+		const cam = 'PLUS-Selatan SUNGAI BESI TOLL KM310.1 NB';
 		const score = isNaN(Number(msg.content?.[0]?.text)) ? -1 : Number(msg.content?.[0]?.text);
 		await env.DB.prepare(`INSERT INTO Results (camera, score, img_url) VALUES ('${cam}', ${score}, '${key}.jpg')`).run();
 	},
